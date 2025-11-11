@@ -1,0 +1,19 @@
+{
+  "name": "second-project-bank-and-shop",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "report": "playwright show-report",
+    "chromium": "playwright test --project=chromium --headed",
+    "firefox": "playwright test --project=firefox --headed",
+    "webkit": "playwright test --project=webkit --headed",
+    "trace": "playwright show-trace test-results/**/trace.zip",
+    "shop": "playwright test tests/shop",
+    "bank": "playwright test tests/bank"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.42.1",
+    "playwright": "1.42.1"
+  }
+}

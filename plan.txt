@@ -1,0 +1,195 @@
+npm i
+npm i -D playwright@1.42.1
+npx playwright install
+
+
+.gitignore
+
+node_modules
+playwright-report
+test-results
+*.log
+.DS_Store
+
+
+mkdir -p pages/shop pages/bank tests test-data utils
+
+
+mkdir -p test-results playwright-report
+
+
+touch playwright.config.js
+
+touch test-data/credentials.js
+
+touch pages/shop/ShopLandingPage.js
+
+touch pages/bank/BankLoginPage.js
+
+touch tests/smoke.spec.js
+
+
+# make sure browsers are installed for 1.42.1
+npx playwright install
+
+# run everything headless
+npm test
+
+# or in UI mode (great for teaching)
+npm run ui
+
+# open the last HTML report
+npm run report
+
+
+npx playwright test --project=chromium
+
+
+npm install -D @playwright/test@1.42.1
+
+touch pages/bank/BankLoginPage pages/shop/ShopLandingPage
+
+touch test-data/credentials.js
+
+touch tests/smoke.spec.js
+
+
+
+
+{
+  "name": "second-project-bank-and-shop",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "trace": "playwright show-trace test-results/**/trace.zip"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.42.1",
+    "playwright": "1.42.1"
+  }
+}
+
+
+{
+  "name": "second-project-bank-and-shop",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "ui": "playwright test --ui",
+    "report": "playwright show-report",
+    "chromium": "npx playwright test --project=chromium --headed",
+    "firefox": "npx playwright test --project=firefox --headed",
+    "trace": "playwright show-trace test-results/**/trace.zip"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.42.1",
+    "playwright": "1.42.1"
+  }
+}
+
+1. update config
+2. touch pages/shop/CartPage.js pages/bank/DashboardPage.js
+3. mkdir tests/shop tests/bank
+4. touch tests/shop/cart.spec.js tests/bank/dashboard.spec.js
+5. paste codes
+6. update package.json
+7. logger.js in util
+8. tests/fixtures/test-with-logger.js
+9. Update spec files
+
+####### Data Driven Test ###############
+
+Welcome to day 21 of our Playwright plus JS. 
+Today we are going to be talking about data-driven testing. 
+
+| Concept                    | Meaning                                                                                |
+| -------------------------- | -------------------------------------------------------------------------------------- |
+| **Data-driven test**       | Running the same workflow multiple times with different inputs.                        |
+| **Why it matters**         | Validates multiple scenarios quickly, keeps tests DRY.                                 |
+| **Where data lives**       | In `test-data/` files (JSON / JS objects).                                             |
+| **What makes it scalable** | The Page Object Model + loop structure + fixtures = clear separation of data vs logic. |
+
+append test-data/credentials.js
+
+export const bankUsers = [
+  { email: 'testuser@yopmail.com', password: 'Pass2005#', expectSuccess: true },
+  { email: 'testuser1@yopmail.com', password: 'Pass2005#', expectSuccess: true },
+  { email: 'user4@yopmail.com', password: 'Wrong123#', expectSuccess: false },
+  { email: 'user5@yopmail.com', password: 'Wrong123#', expectSuccess: false },
+];
+
+touch test-data/customers.js
+
+export const customers = [
+  { first: 'Anna',  last: 'Stone',  city: 'Austin',   state: 'Texas',     zip: '73301', phone: '5551112222', email: 'anna@yopmail.com' },
+  { first: 'Brian', last: 'King',   city: 'Boston',   state: 'Massachusetts', zip: '02108', phone: '5553334444', email: 'brian@yopmail.com' },
+  { first: 'Cindy', last: 'Lee',    city: 'Chicago',  state: 'Illinois',  zip: '60601', phone: '5555556666', email: 'cindy@yopmail.com' },
+  { first: 'David', last: 'Young',  city: 'Denver',   state: 'Colorado',  zip: '80014', phone: '5557778888', email: 'david@yopmail.com' },
+  { first: 'Ella',  last: 'Wright', city: 'Atlanta',  state: 'Georgia',   zip: '30033', phone: '5559990000', email: 'ella@yopmail.com' },
+];
+
+touch test-data/deposits.js
+
+export const deposits = [
+  { amount: 100 },
+  { amount: 250 },
+  { amount: 500 },
+  { amount: 750 },
+  { amount: 1000 },
+];
+
+touch tests/bank/login-ddt.spec.js
+
+touch tests/shop/checkout-ddt.spec.js
+
+touch tests/bank/deposit-ddt.spec.js
+
+touch pages/shop/CheckoutPage.js
+
+
+
+alerts - https://the-internet.herokuapp.com/javascript_alerts
+iframe - https://the-internet.herokuapp.com/iframe
+pop-up - https://the-internet.herokuapp.com/entry_ad
+upload - https://the-internet.herokuapp.com/upload
+download - https://the-internet.herokuapp.com/download
+
+
+mkdir pages/heroku tests/heroku
+
+touch pages/heroku/AlertsPage.js pages/heroku/IframePage.js pages/heroku/EntryAdPage.js pages/heroku/UploadPage.js pages/heroku/DownloadPage.js
+
+
+
+mkdir pages/api 
+touch pages/api/JsonPlaceholderClient.js 
+Add code
+
+test-data/apiData.js  
+Add code
+
+mkdir tests/api
+touch tests/api/jsonplaceholder.spec.js
+Add code
+
+Explain the codes
+Execute tests
+
+
+Start from Config
+Add configs
+   // run tests in files in parallel
+   fullyParallel: true,
+
+   // let Playwright choose a good number of workers (parallel runs)
+   // (you can override on CLI with --workers=6, etc.)
+   workers: '100%',
+
+Check platwright.dev for CBT
+
+mkdir tests/cbt
+touch tests/cbt/cbt-smoke.spec.js
+
+add code
