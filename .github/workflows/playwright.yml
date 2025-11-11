@@ -4,14 +4,45 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+
 jobs:
   test:
     runs-on: ubuntu-22.04
+    timeout-minutes: 45
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm ci
-      - run: npx playwright install --with-deps
-      - run: npx playwright test tests/cbt/cbt-smoke.spec.js
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers + system deps
+        run: npx playwright install --with-deps
+
+      # optional: pass envs from repo secrets
+      - name: Run Playwright tests
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+        run: npx playwright test tests/cbt/cbt-smoke.spec.js
+
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report
+          retention-days: 14
+
+      - name: Upload traces/videos (if any)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test-results
+          if-no-files-found: ignore
+          retention-days: 14

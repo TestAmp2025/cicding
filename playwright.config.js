@@ -1,6 +1,8 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
 
+const isCI = !!process.env.GITHUB_ACTIONS;
+
 export default defineConfig({
   testDir: './tests',
 
@@ -19,7 +21,7 @@ export default defineConfig({
 
   // 📦 Test output folders
   outputDir: 'test-results',
-  reporter: [['html', { open: 'never' }]], // HTML report → ./playwright-report
+  reporter: [['github'],['html', { open: 'never' }]], // HTML report → ./playwright-report
 
   use: {
     // 💻 Full HD viewport (simulates full-screen desktop)

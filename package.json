@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "test": "playwright test",
+    "test:ci": "playwright test",
     "report": "playwright show-report",
     "chromium": "playwright test --project=chromium --headed",
     "firefox": "playwright test --project=firefox --headed",
